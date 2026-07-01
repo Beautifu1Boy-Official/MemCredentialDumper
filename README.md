@@ -37,7 +37,7 @@ MemCredentialDumper 是一款 Godzilla 插件，注入目标 JVM 后一键提取
 依赖 Godzilla 的 JAR，pom.xml 里用 system scope 引用，需要改成你本地的路径：
 
 ```xml
-<systemPath>D:\desktop\Godzilla-tezhan.jar</systemPath>
+<systemPath>D:\desktop\Godzilla.jar</systemPath>
 ```
 
 然后：
@@ -64,15 +64,7 @@ mvn clean package
 **目标端（HashBootstrap + HashMemDumper）**：HashBootstrap 负责在目标 ClassLoader 里 define 这两个类，然后 HashMemDumper 通过 `findApplicationContext` 找 Spring 容器，再逐个提取器从 Bean 里反射拿凭据。
 
 ## JDK 兼容
-
-- 源码 target 是 JDK 6，兼容大部分老环境
 - 高版本 JDK（9+ / 17+）通过三层 fallback 加载类：
   1. `ClassLoader.defineClass` 反射
   2. `sun.misc.Unsafe.defineClass`
   3. `MethodHandles.Lookup.defineClass`
-
-## 注意事项
-
-- 如果目标之前加载过旧版 HashMemDumper，需要重启目标 JVM 才能用上新代码。因为 `loadClass` 优先返回已加载的类，不会重新 define。
-- 提取能力取决于目标 classpath 里有没有对应框架的类，缺对应依赖的提取器会自动跳过。
-- 结果里的密码是明文，注意保存和传输安全。
