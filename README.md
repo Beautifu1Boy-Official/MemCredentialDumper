@@ -1,6 +1,6 @@
 # MemCredentialDumper
 
-MemCredentialDumper 是一款 Godzilla 插件，注入目标 JVM 后一键提取内存中的数据库连接、中间件密钥、云服务 AK/SK、认证 Token 等敏感凭据，全程无文件落地。
+MemCredentialDumper 是一款 Godzilla 插件，注入目标 JVM 后一键提取内存中的数据库连接、中间件密钥、云服务 AK/SK等敏感凭据，全程无文件落地。
 <img width="1272" height="645" alt="0880c08b011087908541" src="https://github.com/user-attachments/assets/ff03e93a-99d6-4ed5-9de9-e1199978e43b" />
 
 
